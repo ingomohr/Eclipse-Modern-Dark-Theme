@@ -6,7 +6,7 @@ This plugin adds the _Modern Dark_ theme to Eclipse IDE.
 
 - Gives Eclipse a clean visual overhaul
 
-- Allows Eclipses' Project Explorer font to be set.
+- Allows Eclipse's Project Explorer font to be set.
 
 - Provides customization options for the colors used in the theme 
 
@@ -39,4 +39,4 @@ Open Eclipse's preferences and navigate to General -> Appearance -> Colors and F
 
 ### Update Site
 
-`https://raw.githubusercontent.com/AObuchow/Eclipse-Modern-Dark-Theme/master/updatesite/`
+`https://raw.githubusercontent.com/AObuchow/Eclipse-Modern-Dark-Theme/updatesite/updatesite/`
