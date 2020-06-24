@@ -3,43 +3,36 @@
 
 name: Deploy P2 Updatesite
 
-on:
-  push:
-    branches: [ master ]
+on: [push, pull_request]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 1.11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.11
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
-    - name: Replace Updatesite
-      run: |
-        rm -r updatesite
-        git config --local user.name "GitHub Action"
-        git config user.email "github-action@users.noreply.github.com"
-        git checkout -B updatesite
-        git rm -r updatesite/
-        mkdir updatesite
-        cd releng-updatesite/target
-        mv  -v repository/* ../../updatesite/
-        cd ..
-        cd ..
-        git add updatesite/
-    - name: Commit new Updatesite
-      run: |
-        git commit -m "deploy new updatesite"
-    - name: GitHub Push
-      uses: ad-m/github-push-action@v0.6.0
-      with:
-        branch: updatesite
-        force: true
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Fetch branch name
+        run: 
+          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: fetch_branch
+      - name: Print branch name
+        run:
+          echo 'recorded branch-name is' ${{ steps.fetch_branch.outputs.branch }}
+      - uses: actions/checkout@v2
+      - name: Set up JDK 1.11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.11
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+      - name: Push Updatesite
+        uses: ingomohr/push-p2-repo-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-p2-repo-created-by-maven: 'releng-updatesite/target'
+          path-to-p2-repo-target: 'updatesite'
+          commit-message: 'add new updatesite'
+          target-branch-name: builds-${{ steps.fetch_branch.outputs.branch }}
+
 
