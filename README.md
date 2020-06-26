@@ -1,4 +1,7 @@
+changex
+
 # Eclipse Modern Dark Theme
+
 
 This plugin adds the _Modern Dark_ theme to Eclipse IDE.
 
@@ -8,7 +11,7 @@ This plugin adds the _Modern Dark_ theme to Eclipse IDE.
 
 - Allows Eclipse's Project Explorer font to be set.
 
-- Provides customization options for the colors used in the theme 
+- Provides customization options for the colors used in the theme
 
 ## How it looks
 
