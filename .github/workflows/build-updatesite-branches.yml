@@ -5,9 +5,13 @@ name: Build Branch
 
 on:
   push:
-    branches:
-      - /refs/heads/*
-      - !master
+    branches-ignore:
+      - master
+    tags-ignore:
+      - '**'
+  create:
+    type:
+      - branch
 
 jobs:
   build:
