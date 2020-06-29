@@ -9,9 +9,6 @@ on:
       - master
     tags-ignore:
       - '**'
-  create:
-    type:
-      - branch
 
 jobs:
   build:
